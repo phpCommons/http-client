@@ -1,0 +1,41 @@
+{
+    "name": "php-commons/http-client",
+    "description": "HTTP client as wrapper for Guzzle 6",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Michał Ligus",
+            "email": "maveilthain@gmail.com"
+        }
+    ],
+    "version": "0.5.4",
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^5.4",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "5.3.3",
+        "netresearch/jsonmapper": "1.2.0",
+        "kherge/json": "1.0.3"
+    },
+    "require-dev": {
+        "ext-json": "*",
+        "phpunit/phpunit": "~4.8.36",
+        "php-mock/php-mock-phpunit": "^0.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "PhpCommons\\HttpClient\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "platform": {
+            "php": "5.4"
+        }
+    }
+}
