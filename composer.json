@@ -9,7 +9,6 @@
             "email": "maveilthain@gmail.com"
         }
     ],
-    "version": "1.0.0",
     "minimum-stability": "stable",
     "require": {
         "php": "^8.5",
