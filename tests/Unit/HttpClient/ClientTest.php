@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\HttpClient;
 
+use PHPUnit\Framework\Attributes\Test;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
@@ -18,7 +19,7 @@ use Tests\Unit\TestCase\UnitTestCase;
 
 class ClientTest extends UnitTestCase
 {
-    /** @test */
+    #[Test]
     public function whenClientSendRequestByGuzzleClientThenResponseShouldHaveReturnedBody(): void
     {
         $responseBody = [
@@ -54,7 +55,7 @@ class ClientTest extends UnitTestCase
         $this->assertEquals($responseBody, $response->toArray());
     }
 
-    /** @test */
+    #[Test]
     public function whenClientSendPostRequestByGuzzleClientThenRequestHasCorrectMethodPathAndBody(): void
     {
         $requestBody = ['username' => 'phpunit'];
@@ -94,7 +95,7 @@ class ClientTest extends UnitTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function whenClientSendGetRequestWithParametersThenRequestShouldHaveCorrectParamters(): void
     {
         $requestParameters = ['username' => 'phpunit'];
@@ -132,7 +133,7 @@ class ClientTest extends UnitTestCase
         $this->assertEquals($requestArray['headers']['query'], $requestParameters);
     }
 
-    /** @test */
+    #[Test]
     public function whenClientSendGetRequestAndGuzzleResponseFailsThenResponseWithExceptionShouldBeCreated(): void
     {
         $requestParameters = ['username' => 'phpunit'];

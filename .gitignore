@@ -10,4 +10,6 @@
 .idea/
 
 /phpunit.xml
+/test-results/
+/tests/reports/
 .phpunit.result.cache

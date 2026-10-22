@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Tests\Unit\HttpClient;
 
+use PHPUnit\Framework\Attributes\Test;
 use Exception;
 use PhpCommons\HttpClient\Response;
 use Psr\Http\Message\ResponseInterface;
@@ -13,7 +14,7 @@ use Tests\Unit\TestCase\UnitTestCase;
 class ResponseTest extends UnitTestCase
 {
 
-    /** @test */
+    #[Test]
     public function thatCreateResponseFromResponseInterfaceReturnsNewResponseObject(): void
     {
         $responseInterfaceMock = $this->createMock(ResponseInterface::class);
@@ -22,7 +23,7 @@ class ResponseTest extends UnitTestCase
         $this->assertInstanceOf(Response::class, $response);
     }
 
-    /** @test */
+    #[Test]
     public function thatCreateResponseFromExceptionReturnsNewResponseObject(): void
     {
         $exception = $this->createMock(Exception::class);
@@ -31,7 +32,7 @@ class ResponseTest extends UnitTestCase
         $this->assertInstanceOf(Response::class, $response);
     }
 
-    /** @test */
+    #[Test]
     public function whenSourceResponseHasBodyWithContentsThenGetBodyReturnsPassedBody(): void
     {
         $body = [
@@ -51,7 +52,7 @@ class ResponseTest extends UnitTestCase
         $this->assertEquals(json_encode($body, JSON_THROW_ON_ERROR, 512), $response->getBody());
     }
 
-    /** @test */
+    #[Test]
     public function whenResponseHasBodyThenGetBodyReturnsFirstTimePassedBody(): void
     {
         $body = [
@@ -73,7 +74,7 @@ class ResponseTest extends UnitTestCase
         $this->assertEquals(json_encode($body, JSON_THROW_ON_ERROR, 512), $response->getBody());
     }
 
-    /** @test */
+    #[Test]
     public function whenResponseBodyIsSetThenToArrayMethodReturnsAnArray(): void
     {
         $body = [
@@ -95,7 +96,7 @@ class ResponseTest extends UnitTestCase
         $this->assertEquals($body, $response->toArray());
     }
 
-    /** @test */
+    #[Test]
     public function whenResponseHasBodyThanToObjectMethodReturnsObjectInstanceOfPassedClass(): void
     {
         $responseData = [
@@ -116,7 +117,7 @@ class ResponseTest extends UnitTestCase
         $this->assertInstanceOf(NameValueObjectBean::class, $nameValueObjectMock);
     }
 
-    /** @test */
+    #[Test]
     public function whenNoResponseThenCodeShouldBe500(): void
     {
         $responseMock = $this->createPartialMock(Response::class, [
