@@ -3,20 +3,21 @@ declare(strict_types=1);
 
 namespace Tests\Unit\HttpClient;
 
+use PHPUnit\Framework\Attributes\Test;
 use PhpCommons\HttpClient\Factory\RequestFactory;
 use PhpCommons\HttpClient\Request;
 use Tests\Unit\TestCase\UnitTestCase;
 
 class RequestTest extends UnitTestCase
 {
-    /** @test */
+    #[Test]
     public function whenRequestHasUsersResourceAndAddPrefixappThenShouldReturnappUsersPath(): void
     {
         $request = RequestFactory::startsWith('/users');
         $this->assertEquals('/app/users', $request->path('/app'));
     }
 
-    /** @test */
+    #[Test]
     public function whenHeadMethodHasListParameterThenPathShouldBeUserList(): void
     {
         $request = RequestFactory::startsWith('/users')
@@ -25,7 +26,7 @@ class RequestTest extends UnitTestCase
         $this->assertEquals('/users/list', $request->path());
     }
 
-    /** @test */
+    #[Test]
     public function whenGetMethodHasListParameterThenPathShouldBeUserList(): void
     {
         $request = RequestFactory::startsWith('/users')
@@ -34,7 +35,7 @@ class RequestTest extends UnitTestCase
         $this->assertEquals('/users/list', $request->path());
     }
 
-    /** @test */
+    #[Test]
     public function whenPostMethodIsJsonThenReturnedPathShouldBeUsersJson(): void
     {
         $request = RequestFactory::startsWith('/users')
@@ -43,7 +44,7 @@ class RequestTest extends UnitTestCase
         $this->assertEquals('/users/json', $request->path());
     }
 
-    /** @test */
+    #[Test]
     public function whenPutMethodIsJsonThenReturnedPathShouldBeUsersJson(): void
     {
         $request = RequestFactory::startsWith('/users')
@@ -52,7 +53,7 @@ class RequestTest extends UnitTestCase
         $this->assertEquals('/users/json', $request->path());
     }
 
-    /** @test */
+    #[Test]
     public function whenPatchMethodIsObjectThenReturnedPathShouldBeUsersObject(): void
     {
         $request = RequestFactory::startsWith('/users')
@@ -61,7 +62,7 @@ class RequestTest extends UnitTestCase
         $this->assertEquals('/users/object', $request->path());
     }
 
-    /** @test */
+    #[Test]
     public function whenDeleteMethodIsObjectThenReturnedPathShouldBeUsersObject(): void
     {
         $request = RequestFactory::startsWith('/users')
@@ -70,7 +71,7 @@ class RequestTest extends UnitTestCase
         $this->assertEquals('/users/object', $request->path());
     }
 
-    /** @test */
+    #[Test]
     public function whenPurgeMethodIsJsonThenReturnedPathShouldBeUsersJson(): void
     {
         $request = RequestFactory::startsWith('/users')
@@ -79,7 +80,7 @@ class RequestTest extends UnitTestCase
         $this->assertEquals('/users/json', $request->path());
     }
 
-    /** @test */
+    #[Test]
     public function whenOptionsMethodIsJsonThenReturnedPathShouldBeUsersJson(): void
     {
         $request = RequestFactory::startsWith('/users')
@@ -88,7 +89,7 @@ class RequestTest extends UnitTestCase
         $this->assertEquals('/users/json', $request->path());
     }
 
-    /** @test */
+    #[Test]
     public function whenTraceMethodIsObjectThenReturnedPathShouldBeUsersObject(): void
     {
         $request = RequestFactory::startsWith('/users')
@@ -97,7 +98,7 @@ class RequestTest extends UnitTestCase
         $this->assertEquals('/users/object', $request->path());
     }
 
-    /** @test */
+    #[Test]
     public function whenConnectMethodIsObjectThenReturnedPathShouldBeUsersObject(): void
     {
         $request = RequestFactory::startsWith('/users')
@@ -106,7 +107,7 @@ class RequestTest extends UnitTestCase
         $this->assertEquals('/users/object', $request->path());
     }
 
-    /** @test */
+    #[Test]
     public function whenGetRequestPassedWithParametersThenShouldBeReturnsByMethodParameters(): void
     {
         $parameters = [
@@ -120,7 +121,7 @@ class RequestTest extends UnitTestCase
         $this->assertEquals($parameters, $request->parameters());
     }
 
-    /** @test */
+    #[Test]
     public function whenGetRequestHasNoParametersThenReturnsEmptyParametersArray(): void
     {
         $request = RequestFactory::startsWith('/users')
@@ -129,7 +130,7 @@ class RequestTest extends UnitTestCase
         $this->assertEquals([], $request->parameters());
     }
 
-    /** @test */
+    #[Test]
     public function whenGetRequestHasParametersThenMethodHasParametersShouldReturnTrue(): void
     {
         $request = RequestFactory::startsWith('/users')
@@ -141,7 +142,7 @@ class RequestTest extends UnitTestCase
         $this->assertTrue($request->hasParameters());
     }
 
-    /** @test */
+    #[Test]
     public function whenGetRequestHasNoParametersThenMethodHasParametersShouldReturnFale(): void
     {
         $request = RequestFactory::startsWith('/users')
@@ -150,7 +151,7 @@ class RequestTest extends UnitTestCase
         $this->assertFalse($request->hasParameters());
     }
 
-    /** @test */
+    #[Test]
     public function whenPostRequestWithBodyThenReturnsFromMethodBody(): void
     {
         $body = json_encode(
@@ -168,7 +169,7 @@ class RequestTest extends UnitTestCase
         $this->assertEquals($body, $request->body());
     }
 
-    /** @test */
+    #[Test]
     public function whenPostRequestWithJsonBodyThenReturnsFromMethodBody(): void
     {
         $body = [
@@ -182,7 +183,7 @@ class RequestTest extends UnitTestCase
         $this->assertEquals($body, (array) json_decode($request->body(), true, 512, JSON_THROW_ON_ERROR));
     }
 
-    /** @test */
+    #[Test]
     public function whenPutHasBodyThenMethodHasBodyReturnsTrue(): void
     {
         $body = [
@@ -196,7 +197,7 @@ class RequestTest extends UnitTestCase
         $this->assertTrue($request->hasBody());
     }
 
-    /** @test */
+    #[Test]
     public function whenPostHasJsonBodyThenMethodHasBodyReturnsTrue(): void
     {
         $body = [
@@ -210,7 +211,7 @@ class RequestTest extends UnitTestCase
         $this->assertTrue($request->hasBody());
     }
 
-    /** @test */
+    #[Test]
     public function whenPutHasNoBodyThenMethodHasBodyReturnsFalse(): void
     {
         $request = RequestFactory::startsWith('/users')
@@ -219,7 +220,7 @@ class RequestTest extends UnitTestCase
         $this->assertFalse($request->hasBody());
     }
 
-    /** @test */
+    #[Test]
     public function whenHeadThenMethodShouldBeSetToHead(): void
     {
         $request = RequestFactory::startsWith('/users')
@@ -228,7 +229,7 @@ class RequestTest extends UnitTestCase
         $this->assertEquals(Request::METHOD_HEAD, $request->method());
     }
 
-    /** @test */
+    #[Test]
     public function whenGetThenMethodShouldBeSetToGet(): void
     {
         $request = RequestFactory::startsWith('/users')
@@ -237,7 +238,7 @@ class RequestTest extends UnitTestCase
         $this->assertEquals(Request::METHOD_GET, $request->method());
     }
 
-    /** @test */
+    #[Test]
     public function whenPostThenMethodShouldBeSetToPost(): void
     {
         $request = RequestFactory::startsWith('/users')
@@ -246,7 +247,7 @@ class RequestTest extends UnitTestCase
         $this->assertEquals(Request::METHOD_POST, $request->method());
     }
 
-    /** @test */
+    #[Test]
     public function whenPutThenMethodShouldBeSetToPut(): void
     {
         $request = RequestFactory::startsWith('/users')
@@ -255,7 +256,7 @@ class RequestTest extends UnitTestCase
         $this->assertEquals(Request::METHOD_PUT, $request->method());
     }
 
-    /** @test */
+    #[Test]
     public function whenPatchThenMethodShouldBeSetToPatch(): void
     {
         $request = RequestFactory::startsWith('/users')
@@ -264,7 +265,7 @@ class RequestTest extends UnitTestCase
         $this->assertEquals(Request::METHOD_PATCH, $request->method());
     }
 
-    /** @test */
+    #[Test]
     public function whenDeleteThenMethodShouldBeSetToDelete(): void
     {
         $request = RequestFactory::startsWith('/users')
@@ -272,7 +273,7 @@ class RequestTest extends UnitTestCase
         $this->assertEquals(Request::METHOD_DELETE, $request->method());
     }
 
-    /** @test */
+    #[Test]
     public function whenPurgeThenMethodShouldBeSetToPurge(): void
     {
         $request = RequestFactory::startsWith('/users')
@@ -281,7 +282,7 @@ class RequestTest extends UnitTestCase
         $this->assertEquals(Request::METHOD_PURGE, $request->method());
     }
 
-    /** @test */
+    #[Test]
     public function whenOptionsThenMethodShouldBeSetToOptions(): void
     {
         $request = RequestFactory::startsWith('/users')
@@ -290,7 +291,7 @@ class RequestTest extends UnitTestCase
         $this->assertEquals(Request::METHOD_OPTIONS, $request->method());
     }
 
-    /** @test */
+    #[Test]
     public function whenTraceThenMethodShouldBeSetToTrace(): void
     {
         $request = RequestFactory::startsWith('/users')
@@ -299,7 +300,7 @@ class RequestTest extends UnitTestCase
         $this->assertEquals(Request::METHOD_TRACE, $request->method());
     }
 
-    /** @test */
+    #[Test]
     public function whenConnectThenMethodShouldBeSetToConnect(): void
     {
         $request = RequestFactory::startsWith('/users')
@@ -308,7 +309,7 @@ class RequestTest extends UnitTestCase
         $this->assertEquals(Request::METHOD_CONNECT, $request->method());
     }
 
-    /** @test */
+    #[Test]
     public function whenHeadRequestWithHeaderThenReturnsPassedHeader(): void
     {
         $request = RequestFactory::startsWith('/users')
@@ -321,7 +322,7 @@ class RequestTest extends UnitTestCase
         $this->assertEquals($expected, $request->headers());
     }
 
-    /** @test */
+    #[Test]
     public function whenHeadRequestWithHeadersThenExpectsShouldBeTheSameAsPassed(): void
     {
         $headers = [
@@ -334,7 +335,7 @@ class RequestTest extends UnitTestCase
         $this->assertEquals($headers, $request->headers());
     }
 
-    /** @test */
+    #[Test]
     public function whenHeadRequestHasHeadersAndNewHeadersSetThenReturnsAllHeaders(): void
     {
         $headers = [

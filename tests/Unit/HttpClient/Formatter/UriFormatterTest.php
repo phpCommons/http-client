@@ -3,36 +3,37 @@ declare(strict_types=1);
 
 namespace Tests\Unit\HttpClient\Formatter;
 
+use PHPUnit\Framework\Attributes\Test;
 use PhpCommons\HttpClient\Formatter\UriFormatter;
 use Tests\Unit\TestCase\UnitTestCase;
 
 class UriFormatterTest extends UnitTestCase
 {
-    /** @test */
+    #[Test]
     public function whenHostWasDefinedWithoutHttpThenFormatterShouldPrefixUriWithHttpProtocol(): void
     {
         $this->assertEquals('http://localhost', UriFormatter::format('localhost'));
     }
 
-    /** @test */
+    #[Test]
     public function whenBaseUriWithoutHttpProtocolAndHasSlashThenFormatterShouldCleanUpUriToCorrectForm(): void
     {
         $this->assertEquals('http://localhost', UriFormatter::format('/localhost'));
     }
 
-    /** @test */
+    #[Test]
     public function whenBaseUriHasHttpsProtocolThenUriShouldBeTheSameAsBaseUri(): void
     {
         $this->assertEquals('https://localhost', UriFormatter::format('https://localhost'));
     }
 
-    /** @test */
+    #[Test]
     public function whenBaseUriHasHttpProtocolThenUriShouldBeTheSameAsBaseUri(): void
     {
         $this->assertEquals('http://localhost', UriFormatter::format('http://localhost'));
     }
 
-    /** @test */
+    #[Test]
     public function whenBaseUriHasIncorrectDoublesSlashesThenFormatterReturnsCorrectForm(): void
     {
         $this->assertEquals(
@@ -41,7 +42,7 @@ class UriFormatterTest extends UnitTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function whenBaseUriHasIncorrectFormatThenFormatterReturnsCorrectUri(): void
     {
         $this->assertEquals(
@@ -50,7 +51,7 @@ class UriFormatterTest extends UnitTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function whenBaseUriProtocolHasMoreThenOneSlashesThenFormatterReturnsCorrectUri(): void
     {
         $this->assertEquals(
@@ -59,7 +60,7 @@ class UriFormatterTest extends UnitTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function whenBaseUriHasEmptyPathThenReturnsBaseUri(): void
     {
         $this->assertEquals(
@@ -68,13 +69,13 @@ class UriFormatterTest extends UnitTestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function whenBaseUriHasOnlyProtocolThenUriReturnsPassedProtocol(): void
     {
         $this->assertEquals('http', UriFormatter::format('http'));
     }
 
-    /** @test */
+    #[Test]
     public function whenBaseUriHasOnlyHttpsProtocolThenUriReturnsHttps(): void
     {
         $this->assertEquals('https', UriFormatter::format('https'));

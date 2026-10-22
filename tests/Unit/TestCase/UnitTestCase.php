@@ -10,9 +10,9 @@ class UnitTestCase extends TestCase
 {
     use PHPMock;
 
-    protected $namespace;
+    protected ?string $namespace = null;
 
-    protected function setNamespace(string $namespace = null): UnitTestCase
+    protected function setNamespace(?string $namespace = null): UnitTestCase
     {
         $this->namespace = $namespace ?: __NAMESPACE__;
 

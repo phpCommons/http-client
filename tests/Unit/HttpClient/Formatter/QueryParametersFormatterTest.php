@@ -3,12 +3,13 @@ declare(strict_types=1);
 
 namespace Tests\Unit\HttpClient\Formatter;
 
+use PHPUnit\Framework\Attributes\Test;
 use PhpCommons\HttpClient\Formatter\QueryParametersFormatter;
 use PHPUnit\Framework\TestCase;
 
 class QueryParametersFormatterTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function toHttpQueryParameterMethodShouldReturnHttpEncodedUrl(): void
     {
         $httpEncodedParameters = QueryParametersFormatter::toHttpQueryParameter([
@@ -22,7 +23,7 @@ class QueryParametersFormatterTest extends TestCase
         );
     }
 
-    /** @test */
+    #[Test]
     public function toHttpQueryParameterMethodShouldReturnAllDefinedParametersAsFlattenChain(): void
     {
         $httpEncodedParameters = QueryParametersFormatter::toHttpQueryParameter([

@@ -5,7 +5,6 @@ namespace PhpCommons\HttpClient;
 
 use Exception;
 use JsonMapper;
-use KHerGe\JSON\JSON;
 use Psr\Http\Message\ResponseInterface;
 
 class Response
@@ -46,16 +45,15 @@ class Response
 
     public function toArray(): array
     {
-        $json = new JSON();
-        return (array) $json->decode($this->getBody());
+        return (array) json_decode($this->getBody(), false, 512, JSON_THROW_ON_ERROR);
     }
 
     public function toObject(string $className): object
     {
-        $json = new JSON();
         $mapper = new JsonMapper();
-        $array = (array) $json->decode($this->getBody());
-        $object = (object) $json->decode($this->getBody());
+        $decoded = json_decode($this->getBody(), false, 512, JSON_THROW_ON_ERROR);
+        $array = (array) $decoded;
+        $object = (object) $decoded;
         $mapper->bIgnoreVisibility = true;
         return $mapper->map($object, new $className(...array_values($array)));
     }

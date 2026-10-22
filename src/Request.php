@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace PhpCommons\HttpClient;
 
 use PhpCommons\HttpClient\Formatter\PathFormatter;
-use KHerGe\JSON\JSON;
 
 class Request
 {
@@ -135,8 +134,7 @@ class Request
 
     public function withJsonBody(array $body = []): Request
     {
-        $json = new JSON();
-        $this->body = $json->encode($body);
+        $this->body = json_encode($body, JSON_THROW_ON_ERROR);
 
         return $this;
     }
